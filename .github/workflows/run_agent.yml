@@ -1,0 +1,30 @@
+name: Run AI Agent
+
+on:
+  # This schedules the job to run every day at midnight UTC
+  schedule:
+    - cron: '0 0 * * *'
+  # Allows you to trigger the workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install schedule
+          # Add any other dependencies your script may require
+
+      - name: Run the AI Agent script
+        run: |
+          python agent.py
